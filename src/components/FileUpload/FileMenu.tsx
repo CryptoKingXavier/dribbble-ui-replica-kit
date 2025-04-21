@@ -2,23 +2,27 @@
 import React, { useState } from 'react';
 import { Plus, FileJson, FileCode } from 'lucide-react';
 import { FileUploadModal } from './FileUploadModal';
+import { Badge } from "@/components/ui/badge";
 
 interface FileMenuItem {
   icon: React.ReactNode;
   fileType: 'python' | 'java';
   extension: string;
+  badge: string;
 }
 
 const menuItems: FileMenuItem[] = [
   {
     icon: <FileJson className="w-5 h-5" />,
     fileType: 'python',
-    extension: '.py'
+    extension: '.py',
+    badge: '🐍'
   },
   {
     icon: <FileCode className="w-5 h-5" />,
     fileType: 'java',
-    extension: '.java'
+    extension: '.java',
+    badge: '☕'
   }
 ];
 
@@ -56,13 +60,20 @@ export const FileMenu = () => {
         }`}
       >
         {menuItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => handleFileTypeSelect(item.fileType)}
-            className="flex items-center justify-center w-12 h-12 hover:bg-gray-100 transition-colors"
-          >
-            {item.icon}
-          </button>
+          <div key={index} className="relative">
+            <button
+              onClick={() => handleFileTypeSelect(item.fileType)}
+              className="flex items-center justify-center w-12 h-12 hover:bg-gray-100 transition-colors"
+            >
+              {item.icon}
+            </button>
+            <Badge
+              variant="secondary"
+              className="absolute -top-1 -right-1 text-xs px-1.5 py-0.5 min-w-[1.2rem] h-[1.2rem] flex items-center justify-center"
+            >
+              {item.badge}
+            </Badge>
+          </div>
         ))}
       </div>
 
