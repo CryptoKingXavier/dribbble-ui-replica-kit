@@ -4,9 +4,10 @@ import { Upload } from 'lucide-react';
 
 interface UploadAreaProps {
   onFileSelect: (files: FileList) => void;
+  allowedExtension: string;
 }
 
-export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect }) => {
+export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, allowedExtension }) => {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -36,7 +37,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect }) => {
         onChange={handleFileSelect}
         className="hidden"
         id="fileInput"
-        accept=".csv,.doc"
+        accept={allowedExtension}
         multiple
       />
       <label htmlFor="fileInput" className="cursor-pointer">
@@ -44,7 +45,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect }) => {
         <span className="text-blue-500 hover:text-blue-400">Choose a file</span>
         <span className="text-gray-400 mx-2">Or</span>
         <span className="text-gray-400">Drag and drop</span>
-        <p className="text-gray-500 text-sm mt-2">CSV and DOC formats, up to 50 MB.</p>
+        <p className="text-gray-500 text-sm mt-2">Only {allowedExtension} files, up to 50 MB.</p>
       </label>
     </div>
   );
