@@ -1,12 +1,19 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import { FileUploadModal } from '../components/FileUpload/FileUploadModal';
 
 const Index = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+      >
+        Open Upload Modal
+      </button>
+      {isModalOpen && <FileUploadModal onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 };
