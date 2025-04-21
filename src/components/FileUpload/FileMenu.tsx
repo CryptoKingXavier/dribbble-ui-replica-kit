@@ -60,7 +60,7 @@ export const FileMenu = () => {
         }`}
       >
         {menuItems.map((item, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative flex items-center justify-center">
             <button
               onClick={() => handleFileTypeSelect(item.fileType)}
               className="flex items-center justify-center w-12 h-12 hover:bg-gray-100 transition-colors"
@@ -69,7 +69,7 @@ export const FileMenu = () => {
             </button>
             <Badge
               variant="secondary"
-              className="absolute -top-1 -right-1 text-xs px-1.5 py-0.5 min-w-[1.2rem] h-[1.2rem] flex items-center justify-center"
+              className="absolute -top-1 -right-1 text-xs w-5 h-5 p-0 rounded-full flex items-center justify-center"
             >
               {item.badge}
             </Badge>
