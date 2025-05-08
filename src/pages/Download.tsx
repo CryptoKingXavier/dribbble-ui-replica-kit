@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloudDownload, Download as DownloadIcon } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { 
@@ -20,25 +20,35 @@ const Download = () => {
     setIsDownloading(true);
     setProgress(0);
     setShowModal(false);
-    
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = prev + Math.random() * 15;
-        
-        if (newProgress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsDownloading(false);
-            setProgress(0);
-            setShowModal(true);
-          }, 500);
-          return 100;
-        }
-        
-        return newProgress;
-      });
-    }, 500);
   };
+
+  useEffect(() => {
+    let interval: number | null = null;
+    
+    if (isDownloading) {
+      interval = window.setInterval(() => {
+        setProgress((prev) => {
+          const newProgress = prev + 1;
+          
+          if (newProgress >= 100) {
+            if (interval) clearInterval(interval);
+            setTimeout(() => {
+              setIsDownloading(false);
+              setProgress(0);
+              setShowModal(true);
+            }, 500);
+            return 100;
+          }
+          
+          return newProgress;
+        });
+      }, 50); // Update every 50ms for smooth animation
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isDownloading]);
 
   const handleFileDownload = () => {
     // This would normally trigger a real file download
@@ -70,7 +80,7 @@ const Download = () => {
             stroke="url(#progressGradient)"
             strokeDasharray={`${progress * 5.52} 552`}
             strokeLinecap="round"
-            className="transition-all duration-500 ease-in-out"
+            className="transition-all duration-300 ease-in-out"
           />
         </svg>
         
