@@ -50,14 +50,14 @@ const Download = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#e8eaed]">
       {/* Download Progress Circle */}
       <div className="relative w-48 h-48 mb-8">
-        {/* Circular track */}
-        <div className="absolute inset-0 rounded-full border-[8px] border-[#d1d3d8] shadow-lg"></div>
+        {/* Outer ring with shadow */}
+        <div className="absolute inset-0 rounded-full bg-[#d1d3d8] shadow-lg"></div>
         
         {/* Progress indicator with gradient */}
         <svg className="absolute inset-0 w-full h-full -rotate-90">
           <defs>
             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f97316" />
+              <stop offset="0%" stopColor="#e8c870" />
               <stop offset="100%" stopColor="#f9c74f" />
             </linearGradient>
           </defs>
@@ -66,7 +66,7 @@ const Download = () => {
             cy="96"
             r="88"
             fill="none"
-            strokeWidth="8"
+            strokeWidth="16"
             stroke="url(#progressGradient)"
             strokeDasharray={`${progress * 5.52} 552`}
             strokeLinecap="round"
@@ -74,20 +74,24 @@ const Download = () => {
           />
         </svg>
         
-        {/* Button circle */}
+        {/* Inner button circle with 3D effect */}
+        <div className="absolute inset-[8px] rounded-full bg-[#e8eaed] shadow-[inset_0_4px_8px_rgba(0,0,0,0.1)]"></div>
+        
+        {/* Button with depth effect */}
         <button 
           onClick={handleDownload}
           className={cn(
             "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
-            "w-36 h-36 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-md flex items-center justify-center",
-            "transition-all duration-200 hover:shadow-xl focus:outline-none active:scale-95 text-white"
+            "w-32 h-32 rounded-full bg-white shadow-[0_6px_10px_rgba(0,0,0,0.03),0_1px_18px_rgba(0,0,0,0.02),0_3px_5px_rgba(0,0,0,0.04)]",
+            "flex items-center justify-center",
+            "transition-all duration-200 focus:outline-none active:scale-95 active:shadow-[0_2px_5px_rgba(0,0,0,0.05)]"
           )}
           disabled={isDownloading}
         >
           <CloudDownload 
-            size={40} 
+            size={28} 
             className={cn(
-              "text-white",
+              "text-[#8E9196]",
               isDownloading ? "animate-pulse" : ""
             )}
           />
