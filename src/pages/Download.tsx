@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
-import { CloudDownload, FileArchive, Download as DownloadIcon } from 'lucide-react';
+import { CloudDownload, Download as DownloadIcon } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { 
   Dialog,
   DialogContent,
-  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 const Download = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -107,12 +107,17 @@ const Download = () => {
       {/* File Download Modal */}
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="p-0 border-0 overflow-hidden max-w-md">
+          <DialogTitle className="sr-only">Download File</DialogTitle>
+          <DialogDescription className="sr-only">Download your zip file</DialogDescription>
           <div className="bg-white rounded-lg shadow-lg flex items-center p-6">
             <div className="flex-1 flex items-start">
               <div className="mr-4">
-                <div className="flex items-center justify-center w-14 h-14 bg-blue-600 text-white rounded">
-                  <FileArchive size={32} />
-                  <div className="absolute bottom-0 text-[10px] text-white font-bold">zip</div>
+                <div className="w-14 h-14 relative">
+                  <img 
+                    src="/lovable-uploads/481582ba-a592-49de-a422-fd5bdaffea36.png" 
+                    alt="ZIP file" 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
               
