@@ -53,15 +53,21 @@ const Download = () => {
         {/* Circular track */}
         <div className="absolute inset-0 rounded-full border-[8px] border-[#d1d3d8] shadow-lg"></div>
         
-        {/* Progress indicator */}
+        {/* Progress indicator with gradient */}
         <svg className="absolute inset-0 w-full h-full -rotate-90">
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#f97316" />
+              <stop offset="100%" stopColor="#f9c74f" />
+            </linearGradient>
+          </defs>
           <circle
             cx="96"
             cy="96"
             r="88"
             fill="none"
             strokeWidth="8"
-            stroke="#f9c74f"
+            stroke="url(#progressGradient)"
             strokeDasharray={`${progress * 5.52} 552`}
             strokeLinecap="round"
             className="transition-all duration-500 ease-in-out"
@@ -73,15 +79,15 @@ const Download = () => {
           onClick={handleDownload}
           className={cn(
             "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
-            "w-36 h-36 rounded-full bg-white shadow-md flex items-center justify-center",
-            "transition-all duration-200 hover:shadow-lg focus:outline-none active:scale-95"
+            "w-36 h-36 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-md flex items-center justify-center",
+            "transition-all duration-200 hover:shadow-xl focus:outline-none active:scale-95 text-white"
           )}
           disabled={isDownloading}
         >
           <CloudDownload 
-            size={32} 
+            size={40} 
             className={cn(
-              "text-gray-400",
+              "text-white",
               isDownloading ? "animate-pulse" : ""
             )}
           />
